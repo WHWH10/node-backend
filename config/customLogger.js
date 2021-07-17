@@ -15,12 +15,12 @@ const koreaTime = format((info) => {
   return info;
 });
 
-const defaultDir = "/Users/clmns/vscode_workspace/hyd_workspace/logs/default";
-const errorDir = "/Users/clmns/vscode_workspace/hyd_workspace/logs/error";
+const defaultDir = "/Users/eunji/vscode_workspace/hyd_workspace/logs/default";
+const errorDir = "/Users/eunji/vscode_workspace/hyd_workspace/logs/error";
 
-const httpDir = "/Users/clmns/vscode_workspace/hyd_workspace/logs/http/default";
+const httpDir = "/Users/eunji/vscode_workspace/hyd_workspace/logs/http/default";
 const httpErrorDir =
-  "/Users/clmns/vscode_workspace/hyd_workspace/logs/http/error";
+  "/Users/eunji/vscode_workspace/hyd_workspace/logs/http/error";
 
 // if (!fs.existsSync(defaultDir)) {
 //   fs.mkdirSync(defaultDir);

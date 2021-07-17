@@ -3,16 +3,16 @@ const winstonDaily = require("winston-daily-rotate-file");
 const fs = require("fs");
 const { combine, timestamp, printf } = winston.format;
 
-const defaultDir = "/Users/clmns/vscode_workspace/hyd_workspace/logs/default";
-const errorDir = "/Users/clmns/vscode_workspace/hyd_workspace/logs/error";
+const defaultDir = "/Users/eunji/vscode_workspace/hyd_workspace/logs/default";
+const errorDir = "/Users/eunji/vscode_workspace/hyd_workspace/logs/error";
 
-if (!fs.existsSync(defaultDir)) {
-  fs.mkdirSync(defaultDir);
-}
+// if (!fs.existsSync(defaultDir)) {
+//   fs.mkdirSync(defaultDir);
+// }
 
-if (!fs.existsSync(errorDir)) {
-  fs.mkdirSync(errorDir);
-}
+// if (!fs.existsSync(errorDir)) {
+//   fs.mkdirSync(errorDir);
+// }
 
 const logFormat = printf(({ timestamp, level, message, stack }) => {
   if (stack) return `${timestamp} ${level} - ${message}\n${stack}`;

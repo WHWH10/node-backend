@@ -7,6 +7,8 @@ const categoryRouter = require("./routes/category/category");
 const { appLogger, httpLogStream } = require("./config/customLogger");
 const stream = require("./config/logger");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
+
 // const logger = require("./config/customLogger");
 
 const morganFormat = process.env.NODE_ENV !== "production" ? "dev" : "combined"; // NOTE: morgan 출력 형
@@ -36,12 +38,22 @@ app.use("", categoryRouter);
 app.use("/login", loginRouter);
 app.use("/upload", uploadRouter);
 
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("Successfully connected to mongodb"))
+  .catch((e) => console.log(e));
+
 app.listen(process.env.PORT, (req, res) => {
   //   appLogger.info("hello");
-  appLogger().log({
-    level: "info",
-    message: "success",
-  });
+  // appLogger().log({
+  //   level: "info",
+  //   message: "Port success",
+  // });
   console.log(`Listening at Prot :: ${process.env.PORT}`);
   console.log(`MONGO_URL : ${process.env.MONGO_URL}`);
 });

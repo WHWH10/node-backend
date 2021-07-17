@@ -1,61 +1,30 @@
 const express = require("express");
+const uploadController = require("../../controller/upload/uploadController");
 
 const router = express.Router();
 
 // upload 메인
 router.get("", (req, res) => {
-  res.json({
-    ResultCode: 200,
-    ResultMessage: "Upload Get",
-  });
+  return uploadController.getUploadMain(req, res);
 });
 
-// 랩실 업로드
-router.get("/lab", (req, res) => {
-  res.json({
-    ResultCode: 200,
-    ResultMessage: {
-      lab: "lab",
-    },
+// router.post("", uploadController.upload, (req, res) => {
+//   // fileName - 파일명
+//   // saveLocation - 저장할 경로
+//   return uploadController.postUploadFile(req, res);
+// });
+
+router.post("", (req, res) => {
+  uploadController.upload(req, res, function (err) {
+    if (err) {
+      return res.json({
+        ResultCode: 200,
+        ResultMessage: "최대 업로드 파일 수 : 10",
+      });
+    } else {
+      return uploadController.postUploadFile(req, res);
+    }
   });
 });
-
-// 랩별 카테고리 구분(PA/CA)
-router.get("/lab/:category", (req, res) => {
-  let category = req.params.category;
-  res.json({
-    ResultCode: 200,
-    ResultMessage: {
-      lab: "lab",
-      category: category,
-    },
-  });
-});
-
-// 랩별 카테고리 -- Sub Category(fMRI, EEG, 자가진단, 설문, 등)
-router.get("/lab/:category/:subcategory", (req, res) => {
-  let category = req.params.category;
-  let subcategory = req.params.subcategory;
-
-  res.json({
-    ResultCode: 200,
-    ResultMessage: {
-      category: category,
-      subcategory: subcategory,
-    },
-  });
-});
-
-// 클리닉 업로드
-router.get("/clinic", (req, res) => {
-  res.json({
-    ResultCode: 200,
-    ResultMessage: {
-      clinic: "clinic",
-    },
-  });
-});
-
-router.post("", (req, res) => {});
 
 module.exports = router;
